@@ -1,15 +1,21 @@
 class Despesa:
 
-    def __init__(self):
-        self.__nome = str(input(f'→ Digite o nome da despesa: ')).strip().lower()
-        self.__valor = float(input(f'→ Digite o valor da despesa: '))
+    def __init__(self, nome, valor):
+        self.__nome = nome
+        self.__valor = valor
         print(f'Despesa "{self.__nome}" criada com valor {self.__valor}.')
 
-    def get_valor(self):
+    @property
+    def valor(self):
         return self.__valor
 
-    def get_nome(self):
+    @property
+    def nome(self):
         return self.__nome
 
     def imprime_despesa(self):
-        print(f'• Despesa "{self.__nome}: R$ {self.__valor}"')
+        print(f'• Despesa "{self.__nome}": R$ {self.__valor}')
+
+    def registra_despesa(self, despesa, lista, conta):
+        lista.lista_despesas = despesa
+        conta.adicionar_despesa(despesa.valor)
