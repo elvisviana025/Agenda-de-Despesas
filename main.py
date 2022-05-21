@@ -9,4 +9,4 @@ lista_despesas = Lista_despesas()
 # EXECUTA MÉTODOS
 sistema.imprime_texto_inicial()
 conta = sistema.cria_conta()
-sistema.filtra_menu(lista_despesas, conta)
+sistema.exibe_e_filtra_menu(lista_despesas, conta)

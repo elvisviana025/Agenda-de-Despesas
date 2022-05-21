@@ -16,13 +16,13 @@ class Sistema:
         conta = Conta(float(valor_inicial))
         return conta
 
-    def cria_despesa(self):
+    def __cria_despesa(self):
         nome = str(input(f'→ Digite o nome da despesa: ')).strip()
         valor = float(input(f'→ Digite o valor da despesa: '))
         despesa = Despesa(nome, valor)
         return despesa
 
-    def exibe_menu(self):
+    def __exibe_menu(self):
         print('-' * 40)
         escolha = int(input(
             f'Escolha a operação:'
@@ -33,9 +33,22 @@ class Sistema:
             f'\n-> '))
         return escolha
 
-    def filtra_menu(self, lista, conta):
+    def remover_despesa_da_lista_e_conta(self, conta, lista):
+        flag_removeu = False
+        nome = str(input(f'Digite nome da despesa para remover: '))
+        for despesa in lista.lista_despesas:
+            if despesa.nome == nome:
+                conta.remover_despesa_da_conta(despesa.valor)
+                lista.remover_despesa_da_lista(despesa)
+                print(f'• Despesa "{despesa.nome}" removida.')
+                flag_removeu = True
+        if flag_removeu == False:
+            print(f'Erro: despesa "{nome}" não encontrada.')
+
+
+    def exibe_e_filtra_menu(self, lista, conta):
         while True:
-            escolha = self.exibe_menu()
+            escolha = self.__exibe_menu()
 
             if escolha == 1:
                 conta.imprime_valor_inicial()
@@ -46,11 +59,11 @@ class Sistema:
                 conta.imprime_saldo()
 
             elif escolha == 3:
-                despesa = self.cria_despesa()
+                despesa = self.__cria_despesa()
                 despesa.registra_despesa(despesa, lista, conta)
 
             elif escolha == 4:
-                lista.remover_da_lista_e_conta(conta)
+                self.remover_despesa_da_lista_e_conta(conta, lista)
 
             elif escolha == 5:
                 conta.depositar_valor()
@@ -65,13 +78,13 @@ class Sistema:
                 saldo = str(conta.saldo)
 
                 nome = str(input(f'• Digite o nome do arquivo: '))
-                arquivo = open(f'{nome}.txt', "a")
-                arquivo.write(f'----- Lista {nome} -----\n')
-                arquivo.write(f'• Valor inicial: R$ {valor_inicial}\n\n')
-                for despesa in lista_impressão:
-                    arquivo.write(str(despesa))
-                arquivo.write(f'\n• Valor disponível: R$ {saldo}\n')
-                arquivo.close()
+                with open(f'Documentos/{nome}.txt', "a") as arquivo:  # WITH: FECHA O DOCUMENTO AUTOMATICAMENTE APÓS O FIM DOS CMDS
+                    arquivo.write(f'----- Lista {nome} -----\n')
+                    arquivo.write(f'• Valor inicial: R$ {valor_inicial}\n\n')
+                    for despesa in lista_impressão:
+                        arquivo.write(str(despesa))
+                    arquivo.write(f'\n• Valor disponível: R$ {saldo}\n')
+
 
             elif escolha == 0:
                 break

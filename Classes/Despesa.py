@@ -18,4 +18,5 @@ class Despesa:
 
     def registra_despesa(self, despesa, lista, conta):
         lista.lista_despesas = despesa
-        conta.adicionar_despesa(despesa.valor)
+        conta.adicionar_despesa_na_conta(despesa.valor)
+
