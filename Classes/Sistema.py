@@ -22,7 +22,7 @@ class Sistema:
         return escolha
 
     def cria_conta(self):
-        valor_inicial = input(f'→ Digite o valor inicial: ')
+        valor_inicial = input(f'→ Digite o valor inicial: R$ ')
         conta = Conta(float(valor_inicial))
         return conta
 
@@ -58,9 +58,8 @@ class Sistema:
 
     def __criar_documento(self, lista_impressão, resultado_conversao):
         nome = str(input(f'→ Digite o nome do arquivo: '))
-        with open(f'Documentos/{nome}.txt',
-                  "a") as arquivo:  # WITH: FECHA O DOCUMENTO AUTOMATICAMENTE APÓS O FIM DOS CMDS
-            arquivo.write(f'----- Lista {nome} -----\n')
+        with open(f'Documentos/{nome}.txt', "a") as arquivo:  # WITH: FECHA O DOCUMENTO APÓS OS CMDS
+            arquivo.write(f'----- Lista "{nome}" -----\n')
             arquivo.write(f'• Valor inicial: R$ {resultado_conversao[0]}\n\n')
             for despesa in lista_impressão:
                 arquivo.write(str(despesa))

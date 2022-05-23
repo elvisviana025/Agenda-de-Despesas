@@ -20,4 +20,4 @@ class Lista_despesas:
             print(f'• Lista vazia')
         else:
             for despesa in self.lista_despesas:
-                despesa.imprime_despesa()
+                print(despesa)

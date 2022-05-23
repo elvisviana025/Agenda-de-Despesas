@@ -21,13 +21,13 @@ class Conta:
         self.__valor_inicial += valor
 
     def imprime_valor_inicial(self):
-        print(f'• Valor inicial: {self.__valor_inicial}.')
+        print(f'• Valor inicial: R$ {self.__valor_inicial}.')
 
     def imprime_saldo(self):
-        print(f'• Valor disponível: {self.__saldo}.')
+        print(f'• Valor disponível: R$ {self.__saldo}.')
 
     def depositar_valor(self):
-        valor = float(input(f'• Digite o valor do deposito: '))
+        valor = float(input(f'• Digite o valor do deposito: R$ '))
         self.valor_inicial = valor
         self.saldo = valor
 
